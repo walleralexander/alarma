@@ -14,7 +14,7 @@
 >
 > Dieser Code ist **KI-generiert und ungetestet**. KI kann Fehler machen - **menschliche Überprüfung und Tests sind zwingend erforderlich**. Der gesamte Code ist **Open Source und im BETA-Status**. Verwendung auf eigene Gefahr.
 
-< ** Kurzbeschreibung
+> ** Kurzbeschreibung
 > Ein selbst-gehostetes, kosteneffizientes Notification-System für SMS, WhatsApp, Signal, Teams und E-Mail
 
 **Entwickelt von WebPoint Internet Solutions** | *Ein Konzept von Alexander Waller und Claude AI*
