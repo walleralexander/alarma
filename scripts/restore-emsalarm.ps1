@@ -493,7 +493,7 @@ function Stop-Alarma!Containers {
     
     try {
         Push-Location (Join-Path $ProjectDir "docker-compose")
-        docker-compose down 2>&1 | Out-Null
+        docker compose down 2>&1 | Out-Null
         Pop-Location
         
         Write-Log "✓ Container gestoppt" -Level SUCCESS
@@ -515,7 +515,7 @@ function Start-Alarma!Containers {
     
     try {
         Push-Location (Join-Path $ProjectDir "docker-compose")
-        docker-compose up -d 2>&1 | Tee-Object -Variable output | Out-Null
+        docker compose up -d 2>&1 | Tee-Object -Variable output | Out-Null
         Pop-Location
         
         # Warte kurz
@@ -523,7 +523,7 @@ function Start-Alarma!Containers {
         
         # Prüfe Status
         Push-Location (Join-Path $ProjectDir "docker-compose")
-        $status = docker-compose ps 2>&1
+        $status = docker compose ps 2>&1
         Pop-Location
         
         Write-Log "✓ Container gestartet" -Level SUCCESS
@@ -673,7 +673,7 @@ function Test-RestoreSuccess {
     # Prüfe Container-Status
     try {
         Push-Location (Join-Path $ProjectDir "docker-compose")
-        $containerStatus = docker-compose ps 2>&1
+        $containerStatus = docker compose ps 2>&1
         Pop-Location
         
         Write-Log "Container-Status:`n$containerStatus"

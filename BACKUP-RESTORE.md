@@ -458,9 +458,9 @@ openssl enc -aes-256-cbc -salt -in backup.tar.gz -out backup.tar.gz.enc
 
 **Lösung:**
 
-1. Container neu starten: `docker-compose restart <service>`
+1. Container neu starten: `docker compose restart <service>`
 2. Falls erfolglos: Nur das betroffene Volume wiederherstellen
-3. Container neu bauen: `docker-compose up -d --force-recreate <service>`
+3. Container neu bauen: `docker compose up -d --force-recreate <service>`
 
 ### Szenario 2: Datenverlust in einem Volume
 

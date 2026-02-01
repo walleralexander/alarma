@@ -141,10 +141,10 @@ cp apprise-config/apprise.example.yml apprise-config/apprise.yml
 # Bearbeite die Konfigurationsdateien nach deinen Bedürfnissen
 
 # Container starten
-docker-compose up -d
+docker compose up -d
 
 # Status prüfen
-docker-compose ps
+docker compose ps
 ```
 
 ### Android App Setup

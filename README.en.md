@@ -82,10 +82,10 @@ cp apprise-config/apprise.example.yml apprise-config/apprise.yml
 # Edit configuration files according to your needs
 
 # Start containers
-docker-compose up -d
+docker compose up -d
 
 # Check status
-docker-compose ps
+docker compose ps
 ```
 
 ### Android App Setup

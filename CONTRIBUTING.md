@@ -109,23 +109,23 @@ Before submitting a PR:
 1. Clone your fork
 2. Create `.env` from `.env.example`
 3. Update configuration files with test values
-4. Run `docker-compose up -d`
+4. Run `docker compose up -d`
 5. Test your changes
 
 ### Useful Commands
 
 ```bash
 # View logs
-docker-compose logs -f
+docker compose logs -f
 
 # Restart a service
-docker-compose restart apprise-api
+docker compose restart apprise-api
 
 # Rebuild after changes
-docker-compose up -d --build
+docker compose up -d --build
 
 # Stop all services
-docker-compose down
+docker compose down
 ```
 
 ## 🔒 Security

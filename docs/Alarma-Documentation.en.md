@@ -323,13 +323,13 @@ urls:
 
 ```bash
 cd /opt/notification-gateway
-docker-compose up -d
+docker compose up -d
 ```
 
 **Check logs:**
 
 ```bash
-docker-compose logs -f
+docker compose logs -f
 ```
 
 ### Step 6: Android App Setup
@@ -488,9 +488,9 @@ Send-CustomNotification -Tags "teams,email" -Title "Report" -Body "Weekly report
 ### Check Container Status
 
 ```bash
-docker-compose ps
-docker-compose logs sms-gateway
-docker-compose logs whatsapp-gateway
+docker compose ps
+docker compose logs sms-gateway
+docker compose logs whatsapp-gateway
 ```
 
 ### Connection Check
@@ -531,8 +531,8 @@ tar -czf sessions-backup-$(date +%Y%m%d).tar.gz \
 
 ```bash
 cd /opt/notification-gateway
-docker-compose pull
-docker-compose up -d
+docker compose pull
+docker compose up -d
 ```
 
 ---
@@ -609,10 +609,10 @@ curl -X POST http://localhost:3000/3rdparty/v1/message \
 
 ```bash
 # Restart container
-docker-compose restart apprise-api
+docker compose restart apprise-api
 
 # Check logs
-docker-compose logs apprise-api
+docker compose logs apprise-api
 ```
 
 ---

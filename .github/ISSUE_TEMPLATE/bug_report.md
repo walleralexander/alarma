@@ -51,7 +51,7 @@ What actually happened.
 
 ```
 # Paste logs here
-# docker-compose logs [service-name]
+# docker compose logs [service-name]
 ```
 
 </details>

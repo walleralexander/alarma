@@ -323,13 +323,13 @@ urls:
 
 ```bash
 cd /opt/notification-gateway
-docker-compose up -d
+docker compose up -d
 ```
 
 **Vérifier les journaux :**
 
 ```bash
-docker-compose logs -f
+docker compose logs -f
 ```
 
 ### Étape 6 : Configuration de l'application Android
@@ -488,9 +488,9 @@ Send-CustomNotification -Tags "teams,email" -Title "Rapport" -Body "Rapport hebd
 ### Vérifier le statut des conteneurs
 
 ```bash
-docker-compose ps
-docker-compose logs sms-gateway
-docker-compose logs whatsapp-gateway
+docker compose ps
+docker compose logs sms-gateway
+docker compose logs whatsapp-gateway
 ```
 
 ### Vérification de la connexion
@@ -531,8 +531,8 @@ tar -czf sessions-backup-$(date +%Y%m%d).tar.gz \
 
 ```bash
 cd /opt/notification-gateway
-docker-compose pull
-docker-compose up -d
+docker compose pull
+docker compose up -d
 ```
 
 ---
@@ -609,10 +609,10 @@ curl -X POST http://localhost:3000/3rdparty/v1/message \
 
 ```bash
 # Redémarrer le conteneur
-docker-compose restart apprise-api
+docker compose restart apprise-api
 
 # Vérifier les journaux
-docker-compose logs apprise-api
+docker compose logs apprise-api
 ```
 
 ---

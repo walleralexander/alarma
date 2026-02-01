@@ -82,10 +82,10 @@ cp apprise-config/apprise.example.yml apprise-config/apprise.yml
 # Modifiez les fichiers de configuration selon vos besoins
 
 # Démarrer les conteneurs
-docker-compose up -d
+docker compose up -d
 
 # Vérifier le statut
-docker-compose ps
+docker compose ps
 ```
 
 ### Configuration de l'application Android

@@ -246,52 +246,52 @@ Send-InfoMessage -Title "Alarma! Test" -Body "PowerShell Integration funktionier
 
 ```bash
 cd /opt/alarma
-docker-compose ps
+docker compose ps
 ```
 
 ### Logs anzeigen
 
 ```bash
 # Alle Container
-docker-compose logs -f
+docker compose logs -f
 
 # Nur ein Container
-docker-compose logs -f alarma-apprise
-docker-compose logs -f alarma-sms
-docker-compose logs -f alarma-whatsapp
-docker-compose logs -f alarma-signal
+docker compose logs -f alarma-apprise
+docker compose logs -f alarma-sms
+docker compose logs -f alarma-whatsapp
+docker compose logs -f alarma-signal
 ```
 
 ### Container neu starten
 
 ```bash
 # Alle Container
-docker-compose restart
+docker compose restart
 
 # Nur ein Container
-docker-compose restart alarma-apprise
+docker compose restart alarma-apprise
 ```
 
 ### Container stoppen
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
 ### Container starten
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ### Updates
 
 ```bash
 # Images aktualisieren
-docker-compose pull
+docker compose pull
 
 # Container mit neuen Images neu starten
-docker-compose up -d
+docker compose up -d
 ```
 
 ---
@@ -366,7 +366,7 @@ curl http://localhost:8000/metrics
 
 ```bash
 # Logs prüfen
-docker-compose logs CONTAINER_NAME
+docker compose logs CONTAINER_NAME
 
 # Berechtigungen prüfen
 ls -la /opt/alarma/data
@@ -383,7 +383,7 @@ ls -la /opt/alarma/config
 2. **Gateway-Logs prüfen:**
 
    ```bash
-   docker-compose logs -f alarma-sms
+   docker compose logs -f alarma-sms
    ```
 
 3. **Test direkt am Gateway:**
@@ -407,7 +407,7 @@ ls -la /opt/alarma/config
 3. **Logs prüfen:**
 
    ```bash
-   docker-compose logs -f alarma-whatsapp
+   docker compose logs -f alarma-whatsapp
    ```
 
 ### Signal Probleme
@@ -423,7 +423,7 @@ ls -la /opt/alarma/config
 3. **Logs prüfen:**
 
    ```bash
-   docker-compose logs -f alarma-signal
+   docker compose logs -f alarma-signal
    ```
 
 ---

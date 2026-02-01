@@ -141,7 +141,7 @@ read -p "Konfiguration angepasst? (j/n) " -n 1 -r
 echo
 if [[ ! $REPLY =~ ^[Jj]$ ]]; then
     print_info "Bitte zuerst die Konfiguration anpassen!"
-    print_info "Danach ausführen: cd $INSTALL_DIR && docker-compose up -d"
+    print_info "Danach ausführen: cd $INSTALL_DIR && docker compose up -d"
     exit 0
 fi
 
@@ -149,13 +149,13 @@ fi
 echo ""
 echo "Lade Docker Images..."
 cd "$INSTALL_DIR"
-sudo docker-compose pull
+sudo docker compose pull
 print_success "Docker Images geladen"
 
 # Container starten
 echo ""
 echo "Starte Alarma! Container..."
-sudo docker-compose up -d
+sudo docker compose up -d
 print_success "Container gestartet"
 
 # Warte auf Startup
@@ -166,7 +166,7 @@ sleep 30
 # Status prüfen
 echo ""
 echo "Container Status:"
-sudo docker-compose ps
+sudo docker compose ps
 
 # Health Check
 echo ""
@@ -220,9 +220,9 @@ echo "  - Signal: http://$(hostname -I | awk '{print $1}'):3002"
 echo "  - ntfy: http://$(hostname -I | awk '{print $1}'):8080"
 echo ""
 echo "Logs anzeigen:"
-echo "  cd $INSTALL_DIR && sudo docker-compose logs -f"
+echo "  cd $INSTALL_DIR && sudo docker compose logs -f"
 echo ""
 echo "Container stoppen:"
-echo "  cd $INSTALL_DIR && sudo docker-compose down"
+echo "  cd $INSTALL_DIR && sudo docker compose down"
 echo ""
 print_success "Alarma! ist bereit!"

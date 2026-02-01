@@ -304,7 +304,7 @@ services:
 
 ```bash
 # Logs zentral sammeln
-docker-compose logs --follow > /var/log/alarma/container.log
+docker compose logs --follow > /var/log/alarma/container.log
 
 # Logrotate einrichten
 cat > /etc/logrotate.d/alarma << 'EOF'
@@ -324,7 +324,7 @@ EOF
 
 ```bash
 # PowerShell Script
-$logs = docker-compose logs sms-gateway | Select-String -Pattern "failed|unauthorized|403"
+$logs = docker compose logs sms-gateway | Select-String -Pattern "failed|unauthorized|403"
 if ($logs.Count -gt 10) {
     Send-CriticalAlert -Title "Security Alert" -Body "Viele fehlgeschlagene Login-Versuche: $($logs.Count)"
 }
@@ -416,13 +416,13 @@ services:
 1. **Isolieren**
 
    ```bash
-   docker-compose down  # System herunterfahren
+   docker compose down  # System herunterfahren
    ```
 
 2. **Analysieren**
 
    ```bash
-   docker-compose logs > incident-$(date +%Y%m%d).log
+   docker compose logs > incident-$(date +%Y%m%d).log
    ```
 
 3. **Credentials rotieren** (siehe [SECRETS-MANAGEMENT.md](SECRETS-MANAGEMENT.md))
@@ -441,10 +441,10 @@ services:
 
 ```bash
 # Images aktualisieren
-docker-compose pull
+docker compose pull
 
 # Mit neuen Images starten
-docker-compose up -d
+docker compose up -d
 
 # Alte Images entfernen
 docker image prune -a
