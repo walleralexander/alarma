@@ -470,7 +470,6 @@ docker image prune -a
 ## 📞 Security Contact
 
 **E-Mail:** <office@webpoint.at>  
-**Abteilung:** Organisation, Prozessmanagement und IT  
 **WebPoint Internet Solutions**
 
 ---
