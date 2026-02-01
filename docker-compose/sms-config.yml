@@ -1,0 +1,53 @@
+# SMS Gateway Konfiguration
+# Alarma! - WebPoint Internet Solutions
+# 30. Januar 2026
+
+server:
+  # Server lauscht auf allen Interfaces
+  listen: 0.0.0.0:3000
+  
+  # Private Mode - Nur registrierte Geräte
+  mode: private
+  
+  # Token für Device-Registrierung (ÄNDERN!)
+  private_token: "YOUR_SECURE_TOKEN_HERE"
+  
+  # CORS Einstellungen
+  cors:
+    enabled: true
+    allowed_origins:
+      - "*"
+
+# Datenbank - SQLite
+database:
+  # Pfad zur Datenbank
+  dsn: "/data/sms-gateway.db"
+  
+  # Automatische Migrationen
+  auto_migrate: true
+
+# Logging
+logging:
+  # Log Level: debug, info, warn, error
+  level: info
+  
+  # Format: json oder text
+  format: text
+
+# Rate Limiting (optional)
+rate_limiting:
+  enabled: true
+  # Anfragen pro Minute
+  requests_per_minute: 60
+  
+# Webhooks für eingehende SMS (optional)
+webhooks:
+  enabled: false
+  # URL für eingehende SMS
+  # url: "http://your-server/webhook/sms"
+  
+# Cleanup alte Nachrichten (optional)
+cleanup:
+  enabled: true
+  # Nachrichten älter als X Tage löschen
+  retention_days: 30

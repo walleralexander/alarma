@@ -1,0 +1,133 @@
+---
+
+# Alarma! - Multi-Channel Notification Gateway
+# WebPoint Internet Solutions - Ein Konzept von Alexander Waller und Claude AI
+# 30. Januar 2026
+
+networks:
+  alarma-network:
+    driver: bridge
+
+services:
+  # SMS Gateway - Android als SMS Relay
+  sms-gateway:
+    image: capcom6/sms-gateway:latest
+    container_name: alarma-sms
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./config/sms-config.yml:/app/config.yml
+      - ./data/sms:/data
+    environment:
+      - TZ=Europe/Vienna
+    networks:
+      - alarma-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # WhatsApp Gateway - Android als WhatsApp Relay  
+  whatsapp-gateway:
+    image: dickyermawan/kilas:latest
+    container_name: alarma-whatsapp
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./data/whatsapp:/app/data
+    environment:
+      - API_KEY=YOUR_SECURE_API_KEY_HERE
+      - TZ=Europe/Vienna
+    networks:
+      - alarma-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Signal Gateway - Signal Messenger
+  signal-gateway:
+    image: bbernhard/signal-cli-rest-api:latest
+    container_name: alarma-signal
+    ports:
+      - "3002:8080"
+    volumes:
+      - ./data/signal:/home/.local/share/signal-cli
+    environment:
+      - MODE=native
+      - AUTO_RECEIVE_SCHEDULE=0 22 * * *
+      - TZ=Europe/Vienna
+    networks:
+      - alarma-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Apprise API - Zentrale Steuerung
+  apprise-api:
+    image: lscr.io/linuxserver/apprise-api:latest
+    container_name: alarma-apprise
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Vienna
+      - APPRISE_STATELESS_URLS=yes
+      - APPRISE_ATTACH_SIZE=5242880
+    volumes:
+      - ./config/apprise:/config
+      - ./data/apprise-attachments:/attachments
+    ports:
+      - "8000:8000"
+    networks:
+      - alarma-network
+    depends_on:
+      - sms-gateway
+      - whatsapp-gateway
+      - signal-gateway
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ntfy - Optional für Push-Notifications
+  ntfy:
+    image: binwiederhier/ntfy:latest
+    container_name: alarma-ntfy
+    command: 
+      - serve
+    ports:
+      - "8080:80"
+    volumes:
+      - ./config/ntfy:/etc/ntfy
+      - ./data/ntfy-cache:/var/cache/ntfy
+    environment:
+      - TZ=Europe/Vienna
+      - NTFY_BASE_URL=http://localhost:8080
+      - NTFY_CACHE_FILE=/var/cache/ntfy/cache.db
+      - NTFY_BEHIND_PROXY=false
+    networks:
+      - alarma-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--tries=1", "--spider", "http://localhost/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  sms-data:
+  whatsapp-data:
+  signal-data:
+  apprise-config:
+  apprise-attachments:
+  ntfy-config:
+  ntfy-cache:

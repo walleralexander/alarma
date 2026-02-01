@@ -1,0 +1,113 @@
+# Apprise Konfiguration für Alarma!
+# WebPoint Internet Solutions - Multi-Channel Notifications
+# 30. Januar 2026
+#
+# Wichtig: Passe die Telefonnummern, E-Mail-Adressen und Webhook-URLs an!
+
+version: 1
+
+# ============================================================================
+# SMS - Via Android Gateway
+# ============================================================================
+urls:
+  - json://sms-gateway:3000/3rdparty/v1/message:
+      # Basic Auth - Username und Passwort aus SMS Gateway App
+      headers:
+        Authorization: Basic BASE64_ENCODED_USER_PASS_HERE
+        Content-Type: application/json
+      method: POST
+      payload: |
+        {
+          "message": "{{title}}: {{body}}",
+          "phoneNumbers": ["+43XXXXXXXXX"]
+        }
+      # Tags für diese Notification
+      tag: sms, kritisch, notfall, emergency
+      
+  # ============================================================================
+  # WhatsApp - Via Android Gateway
+  # ============================================================================
+  - json://whatsapp-gateway:3001/api/send-message:
+      headers:
+        X-API-KEY: YOUR_SECURE_API_KEY_HERE
+        Content-Type: application/json
+      method: POST
+      payload: |
+        {
+          "sessionId": "YourSessionID",
+          "chatId": "43XXXXXXXXX",
+          "text": "*{{title}}*\n\n{{body}}"
+        }
+      tag: whatsapp, team, info, warnung
+  
+  # ============================================================================
+  # Signal Messenger - Verschlüsselt
+  # ============================================================================
+  - json://signal-gateway:8080/v2/send:
+      headers:
+        Content-Type: application/json
+      method: POST
+      payload: |
+        {
+          "message": "🔔 *{{title}}*\n\n{{body}}\n\n_Gesendet von Alarma!_",
+          "number": "+43XXXXXXXXX",
+          "recipients": ["+43XXXXXXXXX"]
+        }
+      tag: signal, secure, sicher, verschluesselt
+  
+  # ============================================================================
+  # Microsoft Teams - Via Webhook
+  # ============================================================================
+  # Webhook URL aus Teams holen:
+  # Team -> Channel -> ... -> Connectors -> Incoming Webhook
+  - teams://outlook.office.com/webhook/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX@XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/IncomingWebhook/XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX:
+      tag: teams, management, info
+  
+  # Alternative: Apprise's native Teams Format
+  # - msteams://TEAMS_WEBHOOK_TOKEN/:
+  #     tag: teams, management
+  
+  # ============================================================================
+  # E-Mail - Via SMTP
+  # ============================================================================
+  # Format: mailtos://user:pass@smtp.server.com:port?from=FROM&to=TO
+  - mailtos://smtp-user:smtp-password@smtp.example.com:587?from=alarma@example.com&to=it@example.com:
+      tag: email, mail, backup, log
+  
+  # Weitere E-Mail Empfänger
+  - mailtos://smtp-user:smtp-password@smtp.example.com:587?from=alarma@example.com&to=admin@example.com:
+      tag: email, admin
+  
+  # ============================================================================
+  # ntfy - Push Notifications
+  # ============================================================================
+  - ntfy://alarma-ntfy/hohenems-alerts:
+      tag: push, mobile, ntfy
+  
+  # ntfy mit Priorität
+  - ntfy://alarma-ntfy/hohenems-critical?priority=urgent:
+      tag: push-urgent, kritisch-push
+
+# ============================================================================
+# BEISPIEL: Weitere mögliche Services
+# ============================================================================
+
+# Telegram Bot
+# - tgram://BOT_TOKEN/CHAT_ID:
+#     tag: telegram
+
+# Discord Webhook
+# - discord://WEBHOOK_ID/WEBHOOK_TOKEN:
+#     tag: discord
+
+# Slack Webhook
+# - slack://WORKSPACE/TOKEN_A/TOKEN_B/TOKEN_C:
+#     tag: slack
+
+# Gotify
+# - gotify://hostname/token:
+#     tag: gotify
+
+# Pushover
+# - pover://USER_KEY@TOKEN:
+#     tag: pushover

@@ -1,0 +1,34 @@
+# PowerShell
+*.ps1xml
+*.log
+*.tmp
+
+# Secrets and Configuration
+*config.local.yml
+*.env
+*.env.local
+*secrets*
+
+# Docker volumes and data
+sms-data/
+whatsapp-data/
+signal-data/
+ntfy/
+apprise-config/apprise.local.yml
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
+*.backup
+backup-*.tar.gz

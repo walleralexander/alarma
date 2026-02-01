@@ -1,0 +1,67 @@
+# ntfy Server Konfiguration
+# Alarma! - WebPoint Internet Solutions
+# 30. Januar 2026
+
+# Basis URL (für externe Zugriffe anpassen)
+base-url: "http://localhost:8080"
+
+# Listen Adresse
+listen-http: ":80"
+
+# Cache Einstellungen
+cache-file: "/var/cache/ntfy/cache.db"
+cache-duration: "12h"
+
+# Attachment Einstellungen (optional)
+attachment-cache-dir: "/var/cache/ntfy/attachments"
+attachment-total-size-limit: "5G"
+attachment-file-size-limit: "15M"
+attachment-expiry-duration: "3h"
+
+# Upstream Base URL (falls hinter Proxy)
+# upstream-base-url: "https://ntfy.stadt-hohenems.at"
+
+# Visitor Limits (Rate Limiting)
+visitor-subscription-limit: 30
+visitor-request-limit-burst: 60
+visitor-request-limit-replenish: "5s"
+visitor-email-limit-burst: 16
+visitor-email-limit-replenish: "1h"
+
+# Authentication (optional - für Produktion empfohlen)
+# auth-file: "/var/lib/ntfy/user.db"
+# auth-default-access: "deny-all"
+
+# Logging
+log-level: info
+log-format: text
+
+# Metrics für Monitoring (optional)
+# enable-metrics: true
+
+# Web Push (optional, erfordert VAPID keys)
+# web-push-public-key: "YOUR_PUBLIC_KEY"
+# web-push-private-key: "YOUR_PRIVATE_KEY"
+# web-push-file: "/var/cache/ntfy/webpush.db"
+# web-push-email-address: "noreply@example.com"
+
+# Firebase (optional, für Mobile App Push)
+# firebase-key-file: "/etc/ntfy/firebase-key.json"
+
+# SMTP Server für Email Notifications (optional)
+# smtp-sender-addr: "smtp.example.com:587"
+# smtp-sender-user: "ntfy@example.com"
+# smtp-sender-pass: "password"
+# smtp-sender-from: "ntfy@example.com"
+
+# Behind Proxy
+behind-proxy: false
+
+# Keepalive
+keepalive-interval: "45s"
+
+# Manager Interval (Hintergrund-Tasks)
+manager-interval: "1m"
+
+# Timezone
+# TZ: "Europe/Vienna"

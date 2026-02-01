@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nUpdate attribution from Stadt Hohenems to WebPoint Internet Solutions\n\nChanged project attribution to reflect personal development by WebPoint Internet Solutions.\nRemoved Stadt Hohenems references and organizational role description.\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push)",
+      "Bash(git mv:*)",
+      "Bash(git restore:*)",
+      "Bash(gh repo:*)",
+      "Bash(find:*)",
+      "Bash(git init:*)",
+      "Bash(git branch:*)"
+    ]
+  }
+}
